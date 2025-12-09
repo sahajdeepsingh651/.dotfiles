@@ -2,5 +2,8 @@
 	path = alacritty/.config/alacritty/themes
 	url = https://github.com/alacritty/alacritty-theme
 [submodule "tmux-resurrect"]
-	path = tmux/.config/tmux/plugins/tmux-resurrect
+	path = tmux/plugins/tmux-resurrect
+	url = https://github.com/tmux-plugins/tmux-resurrect
+[submodule "tmux/plugins/tmux-resurrect"]
+	path = tmux/plugins/tmux-resurrect
 	url = https://github.com/tmux-plugins/tmux-resurrect
