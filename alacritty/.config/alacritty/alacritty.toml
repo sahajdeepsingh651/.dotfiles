@@ -1,0 +1,8 @@
+[general]
+import = [
+    "~/.config/alacritty/themes/themes/dracula.toml"
+]
+[window]
+padding = { x = 5, y = 5 }
+decorations = "Transparent"
+opacity = 0.8
