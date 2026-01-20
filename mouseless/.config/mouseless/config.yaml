@@ -1,0 +1,49 @@
+# the default speed for mouse movement and scrolling
+baseMouseSpeed: 750.0
+baseScrollSpeed: 20.0
+
+layers:
+  - name: initial
+    bindings:
+      rightalt: layer mouse
+      space: tap-hold space ; toggle-layer arrows ; 200
+
+  - name: mouse
+    passThrough: true
+    bindings:
+      # exit mouse mode
+      q: layer initial
+      esc: layer initial
+
+      # keep mouse layer active
+      # mouse movement (vim style)
+      h: move -1  0
+      l: move  1  0
+      j: move  0  1
+      k: move  0 -1
+
+      # scrolling
+      u: scroll up
+      n: scroll down
+
+      # speed modifiers
+      leftalt: speed 4.0
+      capslock: speed 0.4
+
+      # mouse buttons
+      f: button left
+      d: button middle
+      s: button right
+  - name: arrows
+    passThrough: true
+    bindings:
+      h: left
+      j: down
+      k: up
+      l: right
+
+      q: layer initial
+      esc: layer initial
+      # # 🔥 GRID VIEW 🔥
+      # g: grid-start
+      # enter: click left

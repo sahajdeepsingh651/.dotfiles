@@ -150,7 +150,7 @@ export GOROOT=/usr/local/go
 export GOPATH=$HOME/go
 
 # Update PATH to include GOPATH and GOROOT binaries
-export PATH=$GOPATH/bin:$GOROOT/bin:$HOME/.local/bin:$PATH
+export PATH="$GOPATH/bin:$GOROOT/bin:$HOME/.local/bin:$HOME/.opencode/bin:$PATH"
 
 # Loop through all files in the ~/.config/fabric/patterns directory
 for pattern_file in $HOME/.config/fabric/patterns/*; do
@@ -181,3 +181,11 @@ yt() {
 }
 . "$HOME/.cargo/env"
 source /home/sahaj/alacritty/extra/completions/alacritty.bash
+#
+# source /home/sahaj/Git/kube-ps1/kube-ps1.sh
+# PS1='[\u@\h \W $(kube_ps1)]\$ '
+
+# opencode
+export PATH=/home/sahaj/.opencode/bin:$PATH
+alias cls="clear"
+alias ml="sudo mouseless --config ~/.config/mouseless/config.yaml"
