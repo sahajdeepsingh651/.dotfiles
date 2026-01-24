@@ -31,9 +31,10 @@ layers:
       capslock: speed 0.4
 
       # mouse buttons
-      f: button left
-      d: button middle
-      s: button right
+      d: button left
+      s: button middle
+      a: button right
+
   - name: arrows
     passThrough: true
     bindings:
