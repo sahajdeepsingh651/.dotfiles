@@ -1,0 +1,226 @@
+{
+  "$schema": "https://opencode.ai/theme.json",
+  "defs": {
+    "dracula_bg": "#282a36",
+    "dracula_fg": "#ffffff",
+    "dracula_black": "#000000",
+    "dracula_red": "#ff5555",
+    "dracula_green": "#50fa7b",
+    "dracula_yellow": "#f1fa8c",
+    "dracula_blue": "#bd93f9",
+    "dracula_magenta": "#ff79c6",
+    "dracula_cyan": "#8be9fd",
+    "dracula_white": "#bbbbbb",
+    "dracula_bright_black": "#555555",
+    "dracula_bright_white": "#ffffff",
+    "dracula_bright_blue": "#caa9fa",
+    "transparent": "#00000000",
+    "dracula_bg_80": "#282a36CC",
+    "dracula_bg_85": "#282a36D9",
+    "dracula_bg_70": "#282a36B3",
+    "dracula_bg_60": "#282a3699",
+    "dracula_bg_40": "#282a3666"
+  },
+  "theme": {
+    "primary": {
+      "dark": "dracula_cyan",
+      "light": "dracula_blue"
+    },
+    "secondary": {
+      "dark": "dracula_magenta",
+      "light": "dracula_magenta"
+    },
+    "accent": {
+      "dark": "dracula_yellow",
+      "light": "dracula_yellow"
+    },
+    "error": {
+      "dark": "dracula_red",
+      "light": "dracula_red"
+    },
+    "warning": {
+      "dark": "dracula_yellow",
+      "light": "dracula_yellow"
+    },
+    "success": {
+      "dark": "dracula_green",
+      "light": "dracula_green"
+    },
+    "info": {
+      "dark": "dracula_cyan",
+      "light": "dracula_blue"
+    },
+    "text": {
+      "dark": "dracula_fg",
+      "light": "dracula_fg"
+    },
+    "textMuted": {
+      "dark": "dracula_white",
+      "light": "dracula_white"
+    },
+    "background": {
+      "dark": "transparent",
+      "light": "transparent"
+    },
+    "backgroundPanel": {
+      "dark": "dracula_bg_85",
+      "light": "dracula_bg_85"
+    },
+    "backgroundElement": {
+      "dark": "dracula_bg_70",
+      "light": "dracula_bg_70"
+    },
+    "border": {
+      "dark": "dracula_bright_black",
+      "light": "dracula_bright_black"
+    },
+    "borderActive": {
+      "dark": "dracula_cyan",
+      "light": "dracula_cyan"
+    },
+    "borderSubtle": {
+      "dark": "dracula_black",
+      "light": "dracula_black"
+    },
+    "diffAdded": {
+      "dark": "dracula_green",
+      "light": "dracula_green"
+    },
+    "diffRemoved": {
+      "dark": "dracula_red",
+      "light": "dracula_red"
+    },
+    "diffContext": {
+      "dark": "dracula_white",
+      "light": "dracula_white"
+    },
+    "diffHunkHeader": {
+      "dark": "dracula_bright_black",
+      "light": "dracula_bright_black"
+    },
+    "diffHighlightAdded": {
+      "dark": "dracula_green",
+      "light": "dracula_green"
+    },
+    "diffHighlightRemoved": {
+      "dark": "dracula_red",
+      "light": "dracula_red"
+    },
+    "diffAddedBg": {
+      "dark": "dracula_bg_60",
+      "light": "dracula_bg_60"
+    },
+    "diffRemovedBg": {
+      "dark": "dracula_bg_60",
+      "light": "dracula_bg_60"
+    },
+    "diffContextBg": {
+      "dark": "dracula_bg_40",
+      "light": "dracula_bg_40"
+    },
+    "diffLineNumber": {
+      "dark": "dracula_white",
+      "light": "dracula_white"
+    },
+    "diffAddedLineNumberBg": {
+      "dark": "dracula_bg_60",
+      "light": "dracula_bg_60"
+    },
+    "diffRemovedLineNumberBg": {
+      "dark": "dracula_bg_60",
+      "light": "dracula_bg_60"
+    },
+    "markdownText": {
+      "dark": "dracula_fg",
+      "light": "dracula_fg"
+    },
+    "markdownHeading": {
+      "dark": "dracula_magenta",
+      "light": "dracula_magenta"
+    },
+    "markdownLink": {
+      "dark": "dracula_cyan",
+      "light": "dracula_cyan"
+    },
+    "markdownLinkText": {
+      "dark": "dracula_blue",
+      "light": "dracula_blue"
+    },
+    "markdownCode": {
+      "dark": "dracula_green",
+      "light": "dracula_green"
+    },
+    "markdownBlockQuote": {
+      "dark": "dracula_white",
+      "light": "dracula_white"
+    },
+    "markdownEmph": {
+      "dark": "dracula_yellow",
+      "light": "dracula_yellow"
+    },
+    "markdownStrong": {
+      "dark": "dracula_red",
+      "light": "dracula_red"
+    },
+    "markdownHorizontalRule": {
+      "dark": "dracula_bright_black",
+      "light": "dracula_bright_black"
+    },
+    "markdownListItem": {
+      "dark": "dracula_cyan",
+      "light": "dracula_cyan"
+    },
+    "markdownListEnumeration": {
+      "dark": "dracula_magenta",
+      "light": "dracula_magenta"
+    },
+    "markdownImage": {
+      "dark": "dracula_blue",
+      "light": "dracula_blue"
+    },
+    "markdownImageText": {
+      "dark": "dracula_cyan",
+      "light": "dracula_cyan"
+    },
+    "markdownCodeBlock": {
+      "dark": "dracula_fg",
+      "light": "dracula_fg"
+    },
+    "syntaxComment": {
+      "dark": "dracula_bright_black",
+      "light": "dracula_bright_black"
+    },
+    "syntaxKeyword": {
+      "dark": "dracula_magenta",
+      "light": "dracula_magenta"
+    },
+    "syntaxFunction": {
+      "dark": "dracula_green",
+      "light": "dracula_green"
+    },
+    "syntaxVariable": {
+      "dark": "dracula_cyan",
+      "light": "dracula_cyan"
+    },
+    "syntaxString": {
+      "dark": "dracula_yellow",
+      "light": "dracula_yellow"
+    },
+    "syntaxNumber": {
+      "dark": "dracula_blue",
+      "light": "dracula_blue"
+    },
+    "syntaxType": {
+      "dark": "dracula_bright_blue",
+      "light": "dracula_bright_blue"
+    },
+    "syntaxOperator": {
+      "dark": "dracula_magenta",
+      "light": "dracula_magenta"
+    },
+    "syntaxPunctuation": {
+      "dark": "dracula_fg",
+      "light": "dracula_fg"
+    }
+  }
+}
