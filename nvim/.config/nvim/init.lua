@@ -21,7 +21,7 @@ require("lazy").setup({
 	--  require("plugins.colortheme.kanagawa_colorscheme"),
 	--	require("plugins.colortheme.gruvbox_colorscheme"),
 	--	require("plugins.colortheme.tokyonight_colorscheme"),
-	require("plugins.opencode"),
+	-- require("plugins.opencode"),
 	require("plugins.colortheme.everforest_colorscheme"),
 	require("plugins.wakatime"),
 	require("plugins.neotree"),

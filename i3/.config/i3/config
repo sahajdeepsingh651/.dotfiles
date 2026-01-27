@@ -43,10 +43,10 @@ bindsym $mod+Shift+l move right
 
 # Workspace names (customize as needed)
 set $ws1 "1:term"
-set $ws2 "2:web"
-set $ws3 "3:code"
-set $ws4 "4:chat"
-set $ws5 "5:files"
+set $ws2 "2:chat-gpt"
+set $ws3 "3:firefox"
+set $ws4 "4:gemini"
+set $ws5 "5:firefox"
 set $ws6 "6"
 set $ws7 "7"
 set $ws8 "8"
@@ -176,6 +176,10 @@ mode "resize" {
 
 # Lock screen
 bindsym $mod+Escape exec i3lock -c 000000
+
+# Screenshots
+bindsym --release $mod+Shift+p exec --no-startup-id scrot -s -f ~/Pictures/Screenshots/screenshot_%Y%m%d_%H%M%S.png
+bindsym --release $mod+p exec --no-startup-id scrot ~/Pictures/Screenshots/screenshot_%Y%m%d_%H%M%S.png
 
 # Power menu mode
 bindsym $mod+Shift+e mode "exit: [l]ogout [r]eboot [s]hutdown"

@@ -184,6 +184,14 @@ source /home/sahaj/alacritty/extra/completions/alacritty.bash
 #
 # source /home/sahaj/Git/kube-ps1/kube-ps1.sh
 # PS1='[\u@\h \W $(kube_ps1)]\$ '
+gitlab_push() {
+    remote_url=$(git remote get-url origin)
+    if [[ "$remote_url" == https://git.enlight.dev/* ]]; then
+        git push "$(echo "$remote_url" | sed "s|https://|https://Sahaj.Singh:${GITLAB_TOKEN}@|")" "$@"
+    else
+        git push "$@"
+    fi
+}
 
 # opencode
 export PATH=/home/sahaj/.opencode/bin:$PATH
