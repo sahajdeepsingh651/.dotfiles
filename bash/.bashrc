@@ -192,7 +192,11 @@ gitlab_push() {
         git push "$@"
     fi
 }
+otw() {
+    local x="${1:-1}"
+    ssh bandit"$x"@bandit.labs.overthewire.org -p 2220
 
+}
 # opencode
 export PATH=/home/sahaj/.opencode/bin:$PATH
 alias cls="clear"
