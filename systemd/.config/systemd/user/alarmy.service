@@ -1,0 +1,12 @@
+[Unit]
+Description=Alarmy - Python notification alarm
+After=graphical-session.target
+
+[Service]
+Type=simple
+ExecStart=/home/sahaj/Projects/alarmy/vevn/bin/python3 /home/sahaj/Projects/alarmy/main.py
+WorkingDirectory=/home/sahaj/Projects/alarmy
+Restart=on-failure
+
+[Install]
+WantedBy=graphical-session.target

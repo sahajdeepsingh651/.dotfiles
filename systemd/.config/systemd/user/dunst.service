@@ -1,0 +1,11 @@
+[Unit]
+Description=Dunst notification daemon
+Before=plasma-workspace.target
+
+[Service]
+ExecStart=/usr/bin/dunst
+Restart=on-failure
+
+[Install]
+WantedBy=plasma-workspace.target
+
