@@ -1,0 +1,13 @@
+.ie \n(.g .ds Aq \(aq
+.el .ds Aq '
+.TH tomat-skip 1  "skip " 
+.SH NAME
+skip \- Skip to the next phase
+.SH SYNOPSIS
+\fBskip\fR [\fB\-h\fR|\fB\-\-help\fR] 
+.SH DESCRIPTION
+Skip the current phase and immediately transition to the next phase (work → break → work → ... → long break). The timer will start in the new phase if auto\-advance is enabled, otherwise it will be paused.
+.SH OPTIONS
+.TP
+\fB\-h\fR, \fB\-\-help\fR
+Print help (see a summary with \*(Aq\-h\*(Aq)

@@ -1,0 +1,56 @@
+.ie \n(.g .ds Aq \(aq
+.el .ds Aq '
+.TH tomat-start 1  "start " 
+.SH NAME
+start \- Start a new Pomodoro session
+.SH SYNOPSIS
+\fBstart\fR [\fB\-w\fR|\fB\-\-work\fR] [\fB\-b\fR|\fB\-\-break\fR] [\fB\-l\fR|\fB\-\-long\-break\fR] [\fB\-s\fR|\fB\-\-sessions\fR] [\fB\-a\fR|\fB\-\-auto\-advance\fR] [\fB\-\-sound\-mode\fR] [\fB\-\-volume\fR] [\fB\-h\fR|\fB\-\-help\fR] 
+.SH DESCRIPTION
+Start a new Pomodoro timer session with the specified durations. If no options are provided, uses defaults from ~/.config/tomat/config.toml or built\-in defaults (25min work, 5min break, 15min long break, 4 sessions). Custom durations only apply to the current session.
+.SH OPTIONS
+.TP
+\fB\-w\fR, \fB\-\-work\fR \fI<WORK>\fR
+Duration of work sessions in minutes. If not specified, uses the value from ~/.config/tomat/config.toml or the built\-in default of 25 minutes.
+.TP
+\fB\-b\fR, \fB\-\-break\fR \fI<BREAK_TIME>\fR
+Duration of short breaks in minutes. If not specified, uses the value from ~/.config/tomat/config.toml or the built\-in default of 5 minutes.
+.TP
+\fB\-l\fR, \fB\-\-long\-break\fR \fI<LONG_BREAK>\fR
+Duration of long breaks in minutes. Long breaks occur after completing the configured number of work sessions. If not specified, uses the value from ~/.config/tomat/config.toml or the built\-in default of 15 minutes.
+.TP
+\fB\-s\fR, \fB\-\-sessions\fR \fI<SESSIONS>\fR
+Number of work/break cycles before taking a long break. If not specified, uses the value from ~/.config/tomat/config.toml or the built\-in default of 4 sessions.
+.TP
+\fB\-a\fR, \fB\-\-auto\-advance\fR \fI<AUTO_ADVANCE>\fR
+Control automatic phase transitions:
+  all      \- Auto\-advance through all phases
+  none     \- Never auto\-advance (pause at transitions)
+  to\-break \- Auto\-advance from work to break only
+  to\-work  \- Auto\-advance from break to work only
+
+If not specified, uses the value from ~/.config/tomat/config.toml or the built\-in default of \*(Aqnone\*(Aq.
+.TP
+\fB\-\-sound\-mode\fR \fI<SOUND_MODE>\fR
+Control sound notifications:
+  embedded    \- Use built\-in audio files (default)
+  system\-beep \- Use system beep (terminal bell)
+  none        \- No sound notifications
+
+If not specified, uses the value from ~/.config/tomat/config.toml or the built\-in default of \*(Aqembedded\*(Aq.
+.TP
+\fB\-\-volume\fR \fI<VOLUME>\fR
+Set the audio volume for sound notifications, from 0.0 (silent) to 1.0 (maximum). Values outside this range will be clamped. If not specified, uses the value from ~/.config/tomat/config.toml or the built\-in default of 0.5.
+.TP
+\fB\-h\fR, \fB\-\-help\fR
+Print help (see a summary with \*(Aq\-h\*(Aq)
+.SH EXTRA
+EXAMPLES:
+
+    # Start with defaults
+    tomat start
+
+    # Custom work/break durations
+    tomat start \-\-work 45 \-\-break 15
+
+    # Auto\-advance between phases
+    tomat start \-\-auto\-advance

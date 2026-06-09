@@ -1,0 +1,68 @@
+.ie \n(.g .ds Aq \(aq
+.el .ds Aq '
+.TH tomat 1  "tomat 2.11.0" 
+.SH NAME
+tomat \- A Pomodoro timer with daemon support for waybar
+.SH SYNOPSIS
+\fBtomat\fR [\fB\-h\fR|\fB\-\-help\fR] [\fB\-V\fR|\fB\-\-version\fR] <\fIsubcommands\fR>
+.SH DESCRIPTION
+Tomat is a Pomodoro timer with a daemon\-based architecture, designed for seamless integration with waybar and other status bars. It uses a Unix socket for client\-server communication, ensuring your timer state persists across waybar restarts and system suspend/resume.
+.SH OPTIONS
+.TP
+\fB\-h\fR, \fB\-\-help\fR
+Print help (see a summary with \*(Aq\-h\*(Aq)
+.TP
+\fB\-V\fR, \fB\-\-version\fR
+Print version
+.SH SUBCOMMANDS
+.TP
+tomat\-daemon(1)
+Manage the background daemon
+.TP
+tomat\-start(1)
+Start a new Pomodoro session
+.TP
+tomat\-stop(1)
+Stop the current session
+.TP
+tomat\-status(1)
+Get current timer status
+.TP
+tomat\-watch(1)
+Continuously output status updates
+.TP
+tomat\-skip(1)
+Skip to the next phase
+.TP
+tomat\-pause(1)
+Pause the current timer
+.TP
+tomat\-resume(1)
+Resume a paused timer
+.TP
+tomat\-toggle(1)
+Toggle timer pause/resume
+.TP
+tomat\-help(1)
+Print this message or the help of the given subcommand(s)
+.SH EXTRA
+EXAMPLES:
+
+    # Start daemon and begin a session
+    tomat daemon start
+    tomat start
+
+    # Custom session durations
+    tomat start \-\-work 45 \-\-break 15
+
+    # Check status (outputs JSON for waybar)
+    tomat status
+
+    # Toggle pause/resume
+    tomat toggle
+
+For more information, visit: https://github.com/jolars/tomat
+.SH VERSION
+v2.11.0
+.SH AUTHORS
+Johan Larsson <johan@jolars.co>

@@ -1,0 +1,63 @@
+.ie \n(.g .ds Aq \(aq
+.el .ds Aq '
+.TH tomat-status 1  "status " 
+.SH NAME
+status \- Get current timer status
+.SH SYNOPSIS
+\fBstatus\fR [\fB\-o\fR|\fB\-\-output\fR] [\fB\-f\fR|\fB\-\-format\fR] [\fB\-h\fR|\fB\-\-help\fR] 
+.SH DESCRIPTION
+Display the current timer status. Output format can be customized for different status bars (waybar, i3tomat\-status\-rs) or plain text. Text appearance can be customized using format templates.
+.SH OPTIONS
+.TP
+\fB\-o\fR, \fB\-\-output\fR \fI<OUTPUT>\fR [default: waybar]
+Output format: waybar, i3tomat\-status\-rs, or plain
+.br
+
+.br
+[\fIpossible values: \fRwaybar, i3tomat\-status\-rs, plain]
+.TP
+\fB\-f\fR, \fB\-\-format\fR \fI<FORMAT>\fR
+Customize the text display using placeholders:
+{icon}    \- Phase icon
+{time}    \- Remaining time (MM:SS)
+{state}   \- Play/pause symbol
+{phase}   \- Phase name
+{session} \- Session progress
+.TP
+\fB\-h\fR, \fB\-\-help\fR
+Print help (see a summary with \*(Aq\-h\*(Aq)
+.SH EXTRA
+OUTPUT FORMATS:
+
+`waybar`
+  : JSON output for waybar (default)
+
+`i3tomat\-status\-rs`
+  : JSON output for i3tomat\-status\-rs
+
+`plain`
+  : Plain text output
+
+FORMAT PLACEHOLDERS:
+
+`{icon}`
+  : Phase icon (🍅 work, ☕ break, 🏖️ long break)
+
+`{time}`
+  : Remaining time (MM:SS)
+
+`{state}`
+  : Play/pause symbol (▶/⏸)
+
+`{phase}`
+  : Phase name (Work/Break/Long Break)
+
+`{session}`
+  : Session progress (e.g. 1/4)
+
+EXAMPLES:
+
+    tomat status
+    tomat status \-\-output plain
+    tomat status \-\-format "{time}"
+    tomat status \-\-format "{phase}: {time} {state}"

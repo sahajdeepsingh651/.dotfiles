@@ -17,18 +17,17 @@ local rtp = vim.opt.rtp
 rtp:prepend(lazypath)
 
 require("lazy").setup({
+    require("plugins.str_highlight"),
 	require("plugins.bufferline"),
-	--  require("plugins.colortheme.kanagawa_colorscheme"),
-	--	require("plugins.colortheme.gruvbox_colorscheme"),
-	--	require("plugins.colortheme.tokyonight_colorscheme"),
-	-- require("plugins.opencode"),
 	require("plugins.colortheme.everforest_colorscheme"),
 	require("plugins.wakatime"),
 	require("plugins.neotree"),
 	require("plugins.lualine"),
 	require("plugins.treesitter"),
+	require("plugins.treesitter_context"),
 	require("plugins.telescope"),
 	require("plugins.autocompletion"),
+	require("plugins.lazydev"),
 	require("plugins.lsp"),
 	require("plugins.comment"),
 	require("plugins.nonels"),
@@ -41,4 +40,7 @@ require("lazy").setup({
 	require("plugins.emoji"),
 	require("plugins.vimbegood"),
 	require("plugins.transparent"),
+require("plugins.trouble"),
+	require("plugins.lazygit"),
+	require("plugins.flash"),
 })

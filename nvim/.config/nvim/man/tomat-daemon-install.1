@@ -1,0 +1,21 @@
+.ie \n(.g .ds Aq \(aq
+.el .ds Aq '
+.TH tomat-daemon-install 1  "install " 
+.SH NAME
+tomat-daemon-install \- Install systemd user service
+.SH SYNOPSIS
+\fBtomat daemon install\fR [\fB\-f\fR|\fB\-\-force\fR] [\fB\-h\fR|\fB\-\-help\fR] 
+.SH DESCRIPTION
+Install and enable the tomat systemd user service. This allows the daemon to start automatically on login and restart if it crashes. The service file is installed to ~/.config/systemd/user/tomat.service.
+.SH OPTIONS
+.TP
+\fB\-f\fR, \fB\-\-force\fR
+Force overwrite existing service file without prompting
+.TP
+\fB\-h\fR, \fB\-\-help\fR
+Print help (see a summary with \*(Aq\-h\*(Aq)
+.SH EXTRA
+After installation, manage the service with systemctl:
+    systemctl \-\-user start tomat.service
+    systemctl \-\-user status tomat.service
+    systemctl \-\-user stop tomat.service

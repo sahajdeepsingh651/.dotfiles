@@ -1,0 +1,13 @@
+.ie \n(.g .ds Aq \(aq
+.el .ds Aq '
+.TH tomat-daemon-stop 1  "stop " 
+.SH NAME
+tomat-daemon-stop \- Stop the running daemon
+.SH SYNOPSIS
+\fBtomat daemon stop\fR [\fB\-h\fR|\fB\-\-help\fR] 
+.SH DESCRIPTION
+Stop the running tomat daemon gracefully. This will terminate any active timer session. The daemon will clean up its socket and PID files.
+.SH OPTIONS
+.TP
+\fB\-h\fR, \fB\-\-help\fR
+Print help (see a summary with \*(Aq\-h\*(Aq)

@@ -1,0 +1,15 @@
+[timer]
+focus_duration = 60
+short_break_duration = 5
+long_break_duration = 15
+cycles_before_long_break = 4
+
+[notifications]
+enabled = true
+sound_enabled = false
+
+[ui]
+theme = "nord"
+
+[integrations]
+hyprland_status_bar = true

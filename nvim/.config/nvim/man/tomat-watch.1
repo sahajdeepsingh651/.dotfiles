@@ -1,0 +1,37 @@
+.ie \n(.g .ds Aq \(aq
+.el .ds Aq '
+.TH tomat-watch 1  "watch " 
+.SH NAME
+watch \- Continuously output status updates
+.SH SYNOPSIS
+\fBwatch\fR [\fB\-o\fR|\fB\-\-output\fR] [\fB\-f\fR|\fB\-\-format\fR] [\fB\-i\fR|\fB\-\-interval\fR] [\fB\-h\fR|\fB\-\-help\fR] 
+.SH DESCRIPTION
+Continuously watch and output timer status updates. This maintains a single connection to the daemon and updates at the specified interval. Automatically exits when the daemon stops. More efficient than polling with \*(Aqstatus\*(Aq command.
+.SH OPTIONS
+.TP
+\fB\-o\fR, \fB\-\-output\fR \fI<OUTPUT>\fR [default: waybar]
+Output format: waybar, i3status\-rs, or plain
+.br
+
+.br
+[\fIpossible values: \fRwaybar, i3status\-rs, plain]
+.TP
+\fB\-f\fR, \fB\-\-format\fR \fI<FORMAT>\fR
+Custom text format (e.g. "{icon} {time}")
+.TP
+\fB\-i\fR, \fB\-\-interval\fR \fI<INTERVAL>\fR [default: 0.25]
+Update interval in seconds
+.TP
+\fB\-h\fR, \fB\-\-help\fR
+Print help (see a summary with \*(Aq\-h\*(Aq)
+.SH EXTRA
+EXAMPLES:
+
+    # Watch with default interval (0.25 seconds)
+    tomat watch
+
+    # Watch with 5\-second updates
+    tomat watch \-\-interval 5
+
+    # Watch with plain text output
+    tomat watch \-\-output plain

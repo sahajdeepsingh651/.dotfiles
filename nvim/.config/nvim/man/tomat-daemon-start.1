@@ -1,0 +1,13 @@
+.ie \n(.g .ds Aq \(aq
+.el .ds Aq '
+.TH tomat-daemon-start 1  "start " 
+.SH NAME
+tomat-daemon-start \- Start the daemon in the background
+.SH SYNOPSIS
+\fBtomat daemon start\fR [\fB\-h\fR|\fB\-\-help\fR] 
+.SH DESCRIPTION
+Start the tomat daemon as a background process. The daemon manages timer state and handles client requests via a Unix socket at $XDG_RUNTIME_DIR/tomat.sock. Only one daemon instance can run at a time.
+.SH OPTIONS
+.TP
+\fB\-h\fR, \fB\-\-help\fR
+Print help (see a summary with \*(Aq\-h\*(Aq)

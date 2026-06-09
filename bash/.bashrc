@@ -179,8 +179,8 @@ yt() {
     local video_link="$1"
     fabric -y "$video_link" $transcript_flag
 }
-. "$HOME/.cargo/env"
-source /home/sahaj/alacritty/extra/completions/alacritty.bash
+# . "$home/.cargo/env"
+#source /home/sahaj/alacritty/extra/completions/alacritty.bash
 #
 # source /home/sahaj/Git/kube-ps1/kube-ps1.sh
 # PS1='[\u@\h \W $(kube_ps1)]\$ '
@@ -200,4 +200,16 @@ otw() {
 # opencode
 export PATH=/home/sahaj/.opencode/bin:$PATH
 alias cls="clear"
-alias ml="sudo mouseless --config ~/.config/mouseless/config.yaml"
+alias ml=" mouseless --config ~/.config/mouseless/config.yaml"
+alias glossary="~/.local/share/pipx/venvs/pymupdf/bin/python3 /home/sahaj/throwaway/glossary_search.py"
+export DOTNET_ROOT=$HOME/.dotnet
+export PATH=$PATH:$HOME/.dotnet
+
+alias watchconnection='watch -n 1 "ss -tnp | grep -E \"5900|3389|5938|22\""'
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
+. "$HOME/.cargo/env"
+export PATH=$PATH:/home/sahaj/Projects/sugar
+export GOROOT=/usr/lib64/go/1.26
