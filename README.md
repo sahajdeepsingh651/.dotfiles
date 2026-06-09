@@ -15,6 +15,7 @@ sudo zypper install git stow neovim alacritty i3 i3status dunst tmux
 Installed separately (not in the openSUSE repos):
 - **[mouseless](https://github.com/jbensmann/mouseless)** — keyboard-driven mouse control
 - **[opencode](https://opencode.ai)** — terminal AI coding assistant
+- **[Claude Code](https://docs.claude.com/en/docs/claude-code)** — Anthropic's terminal AI assistant (`npm i -g @anthropic-ai/claude-code`)
 
 A [Nerd Font](https://www.nerdfonts.com/) is recommended for icons in Neovim, tmux and i3.
 
