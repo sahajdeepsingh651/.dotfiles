@@ -1,0 +1,22 @@
+{
+  "statusLine": {
+    "type": "command",
+    "command": "bash /home/sahaj/.claude/statusline-command.sh"
+  },
+  "enabledPlugins": {
+    "learning-opportunities@learning-opportunities": true,
+    "orient@learning-opportunities": true
+  },
+  "extraKnownMarketplaces": {
+    "learning-opportunities": {
+      "source": {
+        "source": "git",
+        "url": "https://github.com/DrCatHicks/learning-opportunities.git"
+      }
+    }
+  },
+  "effortLevel": "xhigh",
+  "skipDangerousModePermissionPrompt": true,
+  "theme": "dark-ansi",
+  "model": "opus[1m]"
+}

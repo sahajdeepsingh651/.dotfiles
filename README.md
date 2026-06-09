@@ -31,7 +31,7 @@ git submodule update --init --recursive
 
 # symlink the configs you want
 stow nvim                                                   # just Neovim
-stow alacritty bash nvim tmux i3 dunst mouseless opencode systemd   # everything
+stow alacritty bash nvim tmux i3 dunst mouseless opencode claude systemd devchron   # everything
 ```
 
 Stow symlinks each package into `$HOME` — e.g. `nvim/.config/nvim/` → `~/.config/nvim/`.
@@ -50,6 +50,7 @@ Undo a package with `stow -D <package>`.
 | `dunst`     | Notification daemon                          | `~/.config/dunst/` |
 | `mouseless` | Keyboard-driven cursor                       | `~/.config/mouseless/` |
 | `opencode`  | OpenCode AI assistant                        | `~/.config/opencode/` |
+| `claude`    | Claude Code — CLAUDE.md, settings, commands  | `~/.claude/` |
 | `systemd`   | systemd **user** services                    | `~/.config/systemd/user/` |
 | `devchron`  | DevChron                                     | `~/.config/devchron/` |
 
