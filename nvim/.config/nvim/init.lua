@@ -43,4 +43,5 @@ require("lazy").setup({
 require("plugins.trouble"),
 	require("plugins.lazygit"),
 	require("plugins.flash"),
+	require("plugins.mermaid"),
 })
