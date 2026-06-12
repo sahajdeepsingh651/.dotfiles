@@ -64,7 +64,7 @@ How any LLM works in this study. Read this before touching anything here.
 A study of **<topic>** — <one-line description>.
 **The spine:** <central question/tension — or "open; to be sharpened as sources land">.
 
-## The method (non-negotiable order)
+## The Forge loop (non-negotiable order)
 1. **Conjecture before contact.** Before Sahaj reads a source, he writes his naive guess to
    `raw/conjectures/YYYY-MM-DD-<source-slug>.md` — from his own priors. You may **orient** first
    (genre, era, length, the vocabulary needed to parse it) — **never interpret** (claims, takeaways,
@@ -80,6 +80,8 @@ A study of **<topic>** — <one-line description>.
    the broken parts are the calibration record.
 6. **Conjecture snapshots are append-only.** When his model revises, write a *new* dated file — never
    edit an old one. The diff between snapshots is the learning, recorded.
+
+`/forge` runs this loop on any single conjecture.
 
 ## Framing allocation
 Every artifact you produce is an act of framing — there is no frame-free notation. So the split is
