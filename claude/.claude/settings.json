@@ -1,5 +1,5 @@
 {
-  "model": "claude-opus-4-8",
+  "model": "opus[1m]",
   "statusLine": {
     "type": "command",
     "command": "bash /home/sahaj/.claude/statusline-command.sh"
