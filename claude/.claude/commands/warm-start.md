@@ -5,22 +5,49 @@ Sahaj runs this when returning to a project after a gap. Its only job is **resum
 ## What to do
 
 1. **Find the file.** Look for `warm-start.md` at the repo root (`git rev-parse --show-toplevel`), falling back to the current directory.
-2. **If it's missing:** build it from the *current* session. Read back over what's happened so far and write `warm-start.md` at the repo root, in the template format (Next step / Open loops / Ruled out / Where things stand), capturing the dead-ends tried, the threads left open, and the single most useful next action. Then show the result (below) so he can trim it — he curates, you only draft. Caveat: this reads the *current* session only. If he's just logged in and nothing has happened yet, there's nothing to extract — say so rather than writing an empty file.
-3. **If it exists:** read it and **internalize it** — the rest of this session should be context-aware so you can actually help him act on the Next step, not just print it back.
 
-## How to present it — like `/usage`: a clean readout, not a file dump
+2. **Get the session name.** Run `claude session name 2>/dev/null` or use the session name if known from context. Fall back to current date-time if unavailable. This becomes the section header.
 
-Lead with what gets him moving, in this order:
+3. **If the file is missing:** build a new entry from this session — extract dead-ends, open loops, and the single most useful next action from the transcript. Write `warm-start.md` with this entry as the first section (format below). If the session is fresh with nothing in it yet, say so rather than writing an empty entry.
 
-- **▶ Next step** — first and most prominent. The one thing to do now.
-- **◌ Open loops** — what's in flight or unresolved.
-- **✗ Ruled out** — brief, as reference only ("already tried, don't retry"). Don't expand it unless he asks.
-- **↪ Where things stand** — only if present, and only a line.
+4. **If the file exists:** append a new section for this session to the bottom. **Never touch existing sessions** — they are other threads' records. Each session gets exactly one section.
+
+5. **Show only the new entry** in the readout format below. He curates; you only draft.
+
+## File format — append-only, one section per session
+
+```
+## [session-name] — YYYY-MM-DD
+
+### ▶ Next step
+- <the single most useful next action>
+
+### ◌ Open loops
+- <unresolved threads>
+
+### ✗ Ruled out
+- <tried and failed, with brief why — never delete these>
+
+### ↪ Where things stand *(optional)*
+- <one line of current state if Next step alone isn't enough>
+
+---
+```
+
+Oldest sessions at top, newest appended at bottom. One `---` separator after each session.
+
+## How to present the new entry
+
+- **▶ Next step** — first and most prominent.
+- **◌ Open loops** — what's in flight.
+- **✗ Ruled out** — brief, reference only.
+- **↪ Where things stand** — only if present, one line.
 
 Close with a single line offering to start on the Next step. Nothing more.
 
 ## Rules
 
-- **No fabrication.** Reading: display only what's in the file; if a section is empty, say so. Creating: extract only from what actually happened this session — don't invent beyond the transcript.
+- **Append only.** Existing session entries are immutable — never edit them.
+- **No fabrication.** Extract only from what actually happened in this session.
 - **Don't grade, quiz, or recap** the concept — wrong mode.
 - **Keep it short.** He ran this to get to work, not to read.

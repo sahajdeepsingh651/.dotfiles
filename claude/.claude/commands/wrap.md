@@ -8,14 +8,25 @@ Sahaj runs this when he's done for the day and wants to leave a useful note for 
    > "Before you go — what's the next step, and anything nagging you that's not in the chat?"
    One question. Don't ask three things. Wait for his reply.
 
-2. **Find `warm-start.md`** at the repo root (`git rev-parse --show-toplevel`), falling back to cwd.
-   - If missing: create it first (bootstrap from this session, same as `/warm-start` does), then apply his answer on top.
+2. **Find `warm-start.md`** at the repo root (`git rev-parse --show-toplevel`), falling back to cwd. Get the session name (`claude session name 2>/dev/null`, or from context, or fall back to current date-time).
 
-3. **Write his answer in:**
-   - His literal words go into **▶ Next step** (replace whatever's there).
-   - If he mentions something that didn't work or a path he's ruling out, append it to **✗ Ruled out**.
-   - If he mentions something unresolved, add it to **◌ Open loops**.
-   - **Don't rewrite or clean up his words.** His phrasing is the point — it carries intent that polished prose loses.
+3. **Append a new session section** to the bottom of the file (create the file if missing). Use the same format as `/warm-start`:
+   ```
+   ## [session-name] — YYYY-MM-DD
+
+   ### ▶ Next step
+   - <his literal words>
+
+   ### ◌ Open loops
+   - <if he mentioned anything unresolved>
+
+   ### ✗ Ruled out
+   - <if he mentioned anything that didn't work, with brief why>
+
+   ---
+   ```
+   **Never touch existing sessions.** Append only — older sessions are immutable records of other threads.
+   **His literal words.** Don't rewrite or clean up. His phrasing carries intent that polished prose loses.
 
 4. **Confirm in one line:** "Saved. Safe to `/exit`."
 
