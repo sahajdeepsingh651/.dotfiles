@@ -67,6 +67,16 @@ file override the pattern: I write the frame-bearing sentences and make the `[[l
 thinking — suggest, don't make); you keep citations, index, log, contradiction flags. Minimal files —
 a page must force thought when written or actually get reread.
 
+## Warm-start capture (resume mode)
+Only if `warm-start.md` exists at the repo root, keep it current as we work — it's what `/warm-start`
+reads when I return cold. Don't create it unprompted; its absence means this project isn't enrolled.
+Maintain it quietly, without announcing each edit.
+- **Ruled out:** the moment an approach is tried and fails or is abandoned, append a one-line entry with
+the brief why. Never delete these — they stop repeated dead work.
+- **Open loops:** add a thread when it's left unresolved or deferred; remove it once closed.
+- **Next step:** keep it reflecting the single most useful next action *at all times*, updated whenever
+the plan changes — so even an abrupt stop leaves a usable value. Never wait for a "we're stopping" signal.
+
 ## Self-test before sending
 "If I get this answer, what can I DO that I couldn't before?" If it's just "know more," tighten it.
 If it's "make a decision / test a hypothesis / fix something / predict something," send it.
