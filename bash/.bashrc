@@ -213,3 +213,18 @@ export PATH="$BUN_INSTALL/bin:$PATH"
 . "$HOME/.cargo/env"
 export PATH=$PATH:/home/sahaj/Projects/sugar
 export GOROOT=/usr/lib64/go/1.26
+
+# --- devtime break logger ---
+DEVTIME_RAW="$HOME/obsidian_vault/experiments/devtime/raw"
+_dtlog() { echo "$1" >> "$(cat "$HOME/.devtime_current")"; }
+
+sessionstart() {                                  # sessionstart <label>
+  echo "$DEVTIME_RAW/$(date +%F)-${1:-session}.md" > "$HOME/.devtime_current"
+  _dtlog "- $(date +%H:%M)  ▶ START"
+  echo "session → $(cat "$HOME/.devtime_current")"
+}
+brk()        { _dtlog "- $(date +%H:%M)"; }
+brkout()     { _dtlog "- $(date +%H:%M)  ⏸ out"; }
+brkin()      { _dtlog "- $(date +%H:%M)  ⏸ in"; }
+sessionend() { _dtlog "- $(date +%H:%M)  ■ STOPPED"; }
+# --- end devtime break logger ---
