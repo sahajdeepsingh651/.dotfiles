@@ -4,9 +4,10 @@ Sahaj runs this when he's done for the day and wants to leave a useful note for 
 
 ## What to do
 
-1. **Ask one question, wait for his answer:**
-   > "Before you go — what's the next step, and anything nagging you that's not in the chat?"
-   One question. Don't ask three things. Wait for his reply.
+1. **Check `$ARGUMENTS` first.**
+   - If `$ARGUMENTS` is provided: use it directly as the Next step — skip asking the question entirely.
+   - If empty: ask one question and wait for his answer:
+     > "Before you go — what's the next step, and anything nagging you that's not in the chat?"
 
 2. **Find `warm-start.md`** at the repo root (`git rev-parse --show-toplevel`), falling back to cwd. Get the session name (`claude session name 2>/dev/null`, or from context, or fall back to current date-time).
 
