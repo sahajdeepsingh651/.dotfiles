@@ -6,6 +6,9 @@ Forge is Sahaj's named methodology: **bold conjecture → criticism → reality 
 
 `$ARGUMENTS` may carry a conjecture or just a topic.
 
+**First, establish the container** — before asking for a conjecture. Ask: "Which study or project does this belong to — give the slug/name, or 'none' to forge in chat only." Exception: if `$ARGUMENTS` already names a study or project, use it without asking.
+
+Then:
 - **Conjecture given** → restate it verbatim as the committed version, go to step 1.
 - **Topic only** → ask for his bold conjecture. **Never supply it.** Orientation (vocabulary, genre, era, context) is allowed if he's below guessing-threshold; interpretation is not.
 - **Nothing** → ask what he's forging. One question, not three.
@@ -14,7 +17,10 @@ Forge is Sahaj's named methodology: **bold conjecture → criticism → reality 
 
 Get it specific enough to be wrong: what does it predict? what does it **forbid**? (A claim that forbids nothing says nothing.) Push once if it's vague, then take what he gives — a confidently wrong conjecture beats a safely fuzzy one.
 
-If it belongs to a study, snapshot it to `studies/<slug>/raw/conjectures/YYYY-MM-DD-<topic>.md` (append-only — revisions are new files). Otherwise just pin it in chat; offer filing only at the end (minimal files).
+Snapshot destination (all append-only — revisions are new files, never edits):
+- **Study:** `studies/<slug>/raw/conjectures/YYYY-MM-DD-<topic>.md`
+- **Project:** `projects/<name>/raw/conjectures/YYYY-MM-DD-<topic>.md`
+- **None:** pin in chat; offer filing at step 5.
 
 ## 2. Hammer — criticism, summoned
 
@@ -35,7 +41,7 @@ After the resistance, he states the revised conjecture himself. Two checks:
 
 Loop again on the revision, or stop. On stop:
 
-- Offer to file the survivor — a standalone note (`/new`), a study conjecture-snapshot, or (only if the lesson was about *method*, not content) an entry in `experiments/knowledge-creation-log.md`.
+- Offer to file the survivor — a standalone note (`/new`), a conjecture-snapshot in the established container (study or project), or (only if the lesson was about *method*, not content) an entry in `experiments/knowledge-creation-log.md`.
 - Self-test before closing: what can he now **do** — decide, predict, test — that he couldn't before? If the answer is only "know more," the loop isn't done.
 
 ## Hard rules

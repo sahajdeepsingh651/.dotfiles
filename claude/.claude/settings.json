@@ -18,5 +18,6 @@
   },
   "effortLevel": "xhigh",
   "skipDangerousModePermissionPrompt": true,
+  "skipWorkflowUsageWarning": true,
   "theme": "dark-ansi"
 }
