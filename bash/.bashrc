@@ -222,6 +222,9 @@ sessionstart() {
     # sessionstart            -> FREE mode: no timer, ride-till-drop (measure ramp/burnout)
     # sessionstart 40 [5] [l] -> TIMED mode: 40-min chunks, 5-min recovery, auto-cycles + alerts
     local chunk="$1" rec="${2:-5}" label="${3:-session}"
+    # kill any cycle left running from a previous session, so starting twice can't leak
+    [ -f "$HOME/.devtime_pid" ] && kill "$(cat "$HOME/.devtime_pid")" 2>/dev/null
+    rm -f "$HOME/.devtime_pid"
     echo "$DEVTIME_RAW/$(date +%F)-${label}.md" >"$HOME/.devtime_current"
     if [ -z "$chunk" ]; then
         _dtlog "- $(date +%H:%M)  ▶ START  (free)"
@@ -234,7 +237,7 @@ sessionstart() {
     disown
     echo "session → $(cat "$HOME/.devtime_current")  [chunk=${chunk}m recovery=${rec}m, auto-cycling]"
 }
-brk()        { ~/.local/bin/devtime-brk; }           # drift mark — keybind this in i3
+brk()        { ~/.local/bin/devtime-brk; }           # drift mark — bound to tmux prefix+u
 brkstart()   { _dtlog "- $(date +%H:%M)  ⏸ forced out"; }  # external interruption only
 brkend()     { _dtlog "- $(date +%H:%M)  ⏸ forced in"; }
 sessionend() {
