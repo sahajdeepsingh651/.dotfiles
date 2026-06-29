@@ -218,15 +218,27 @@ export GOROOT=/usr/lib64/go/1.26
 DEVTIME_RAW="$HOME/obsidian_vault/experiments/devtime/raw"
 _dtlog() { echo "$1" >>"$(cat "$HOME/.devtime_current")"; }
 
-sessionstart() { # sessionstart <chunk_min> [label]   e.g. sessionstart 40
-    local chunk="${1:?usage: sessionstart <chunk_min> [label]}"
-    local label="${2:-session}"
+sessionstart() {
+    # sessionstart            -> FREE mode: no timer, ride-till-drop (measure ramp/burnout)
+    # sessionstart 40 [5] [l] -> TIMED mode: 40-min chunks, 5-min recovery, auto-cycles + alerts
+    local chunk="$1" rec="${2:-5}" label="${3:-session}"
     echo "$DEVTIME_RAW/$(date +%F)-${label}.md" >"$HOME/.devtime_current"
-    _dtlog "- $(date +%H:%M)  ▶ START  chunk=${chunk}min"
-    echo "session → $(cat "$HOME/.devtime_current")  [chunk=${chunk}min]"
+    if [ -z "$chunk" ]; then
+        _dtlog "- $(date +%H:%M)  ▶ START  (free)"
+        echo "session → $(cat "$HOME/.devtime_current")  [free mode — brk on drift, sessionend to stop]"
+        return
+    fi
+    _dtlog "- $(date +%H:%M)  ▶ START  chunk=${chunk}m recovery=${rec}m"
+    nohup ~/.local/bin/devtime-cycle "$chunk" "$rec" "$(cat "$HOME/.devtime_current")" >/dev/null 2>&1 &
+    echo $! >"$HOME/.devtime_pid"
+    disown
+    echo "session → $(cat "$HOME/.devtime_current")  [chunk=${chunk}m recovery=${rec}m, auto-cycling]"
 }
-brk()        { ~/.local/bin/devtime-brk; }           # back from drift — keybind this
+brk()        { ~/.local/bin/devtime-brk; }           # drift mark — keybind this in i3
 brkstart()   { _dtlog "- $(date +%H:%M)  ⏸ forced out"; }  # external interruption only
 brkend()     { _dtlog "- $(date +%H:%M)  ⏸ forced in"; }
-sessionend() { _dtlog "- $(date +%H:%M)  ■ STOPPED"; }
+sessionend() {
+    [ -f "$HOME/.devtime_pid" ] && kill "$(cat "$HOME/.devtime_pid")" 2>/dev/null && rm -f "$HOME/.devtime_pid"
+    _dtlog "- $(date +%H:%M)  ■ STOPPED"
+}
 # --- end devtime break logger ---
