@@ -1,0 +1,8 @@
+#!/bin/bash
+file=$(cat "$HOME/.devtime_current" 2>/dev/null)
+if [ -z "$file" ]; then
+    notify-send -t 2000 -u normal "devtime" "no active session" 2>/dev/null
+    exit 1
+fi
+echo "- $(date +%H:%M)  ↩" >>"$file"
+notify-send -t 1200 -u low "devtime" "↩ brk" 2>/dev/null || true

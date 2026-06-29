@@ -1,0 +1,24 @@
+#!/bin/bash
+# devtime-cycle <chunk_min> <recovery_min> <file>
+# Auto-cycles chunk -> recovery -> chunk, logging boundaries and alerting at each.
+# Launched detached by `sessionstart <chunk>`; killed by `sessionend`.
+chunk="$1"
+rec="$2"
+file="$3"
+
+stamp() { echo "- $(date +%H:%M)  $1" >>"$file"; }
+alert() {
+    notify-send -u critical "devtime" "$1" 2>/dev/null
+    paplay /usr/share/sounds/freedesktop/stereo/complete.oga 2>/dev/null
+}
+
+while :; do
+    stamp "┌ CHUNK START (${chunk}m)"
+    sleep "${chunk}m"
+    stamp "└ CHUNK END"
+    alert "chunk done → recover ${rec}m"
+    stamp "⏸ recovery start"
+    sleep "${rec}m"
+    stamp "⏵ recovery end"
+    alert "recovery over → next chunk starting"
+done
