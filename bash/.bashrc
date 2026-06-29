@@ -218,13 +218,15 @@ export GOROOT=/usr/lib64/go/1.26
 DEVTIME_RAW="$HOME/obsidian_vault/experiments/devtime/raw"
 _dtlog() { echo "$1" >>"$(cat "$HOME/.devtime_current")"; }
 
-sessionstart() { # sessionstart <label>
-    echo "$DEVTIME_RAW/$(date +%F)-${1:-session}.md" >"$HOME/.devtime_current"
-    _dtlog "- $(date +%H:%M)  ▶ START"
-    echo "session → $(cat "$HOME/.devtime_current")"
+sessionstart() { # sessionstart <chunk_min> [label]   e.g. sessionstart 40
+    local chunk="${1:?usage: sessionstart <chunk_min> [label]}"
+    local label="${2:-session}"
+    echo "$DEVTIME_RAW/$(date +%F)-${label}.md" >"$HOME/.devtime_current"
+    _dtlog "- $(date +%H:%M)  ▶ START  chunk=${chunk}min"
+    echo "session → $(cat "$HOME/.devtime_current")  [chunk=${chunk}min]"
 }
-brk() { _dtlog "- $(date +%H:%M)"; }
-brkstart() { _dtlog "- $(date +%H:%M)  ⏸ break start"; }
-brkend() { _dtlog "- $(date +%H:%M)  ⏸ break end"; }
+brk()        { ~/.local/bin/devtime-brk; }           # back from drift — keybind this
+brkstart()   { _dtlog "- $(date +%H:%M)  ⏸ forced out"; }  # external interruption only
+brkend()     { _dtlog "- $(date +%H:%M)  ⏸ forced in"; }
 sessionend() { _dtlog "- $(date +%H:%M)  ■ STOPPED"; }
 # --- end devtime break logger ---
