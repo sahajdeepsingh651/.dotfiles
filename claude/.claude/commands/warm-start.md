@@ -18,6 +18,7 @@ Sahaj runs this when returning to a project after a gap. Its only job is **resum
 
 ```
 ## [session-name] — YYYY-MM-DD
+<!-- via /warm-start · YYYY-MM-DD HH:MM · author: <model id> -->
 
 ### ▶ Next step
 - <the single most useful next action>
@@ -34,7 +35,7 @@ Sahaj runs this when returning to a project after a gap. Its only job is **resum
 ---
 ```
 
-Oldest sessions at top, newest appended at bottom. One `---` separator after each session.
+Oldest sessions at top, newest appended at bottom. One `---` separator after each session. **Stamp the `<!-- … -->` provenance comment** under each heading you write — fill it with the current `date '+%Y-%m-%d %H:%M'` and your model id. It's metadata: never show it in the readout, and never edit it on existing sections.
 
 ## How to present the new entry
 

@@ -2,14 +2,40 @@
   "env": {
     "CLAUDE_CODE_SCROLL_SPEED": "3"
   },
-  "model": "claude-opus-4-8[1m]",
+  "model": "sonnet",
+  "hooks": {
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 /home/sahaj/.claude/hooks/mode-overlay.py",
+            "timeout": 10,
+            "statusMessage": "mode-overlay"
+          }
+        ]
+      }
+    ],
+    "PostCompact": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 /home/sahaj/.claude/hooks/mode-overlay.py",
+            "timeout": 10,
+            "statusMessage": "mode-overlay compact-reset"
+          }
+        ]
+      }
+    ]
+  },
   "statusLine": {
     "type": "command",
     "command": "bash /home/sahaj/.claude/statusline-command.sh"
   },
   "enabledPlugins": {
     "learning-opportunities@learning-opportunities": true,
-    "orient@learning-opportunities": true
+    "orient@learning-opportunities": false
   },
   "extraKnownMarketplaces": {
     "learning-opportunities": {
@@ -24,5 +50,6 @@
   "tui": "fullscreen",
   "skipDangerousModePermissionPrompt": true,
   "skipWorkflowUsageWarning": true,
-  "theme": "dark-ansi"
+  "theme": "dark-ansi",
+  "editorMode": "vim"
 }

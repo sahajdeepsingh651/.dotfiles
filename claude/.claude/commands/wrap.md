@@ -14,6 +14,7 @@ Sahaj runs this when he's done for the day and wants to leave a useful note for 
 3. **Append a new session section** to the bottom of the file (create the file if missing). Use the same format as `/warm-start`:
    ```
    ## [session-name] — YYYY-MM-DD
+   <!-- via /wrap · YYYY-MM-DD HH:MM · author: <model id> -->
 
    ### ▶ Next step
    - <his literal words>
@@ -28,6 +29,7 @@ Sahaj runs this when he's done for the day and wants to leave a useful note for 
    ```
    **Never touch existing sessions.** Append only — older sessions are immutable records of other threads.
    **His literal words.** Don't rewrite or clean up. His phrasing carries intent that polished prose loses.
+   **Stamp the provenance comment** under the heading — fill `<!-- via /wrap · … -->` with the current `date '+%Y-%m-%d %H:%M'` and your model id. It's metadata: don't show it in the confirmation.
 
 4. **Confirm in one line:** "Saved. Safe to `/exit`."
 
