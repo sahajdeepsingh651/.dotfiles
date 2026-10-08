@@ -89,17 +89,21 @@ bindsym $mod+bracketright workspace next
 # APPLICATIONS
 #==============================================================================
 
-# Terminal (Alacritty)
-bindsym $mod+Return exec alacritty
-
 # Application launcher
-bindsym $mod+space exec --no-startup-id rofi -show drun || dmenu_run
+bindsym $mod+Return exec --no-startup-id rofi -show drun || dmenu_run
+
+# Terminal (Alacritty)
+bindsym $mod+space exec alacritty
 
 # Browser
 bindsym $mod+b exec firefox
 
 # File manager
 bindsym $mod+e exec nautilus || thunar || pcmanfm
+
+# Quick search workflows (Gwern-style)
+bindsym --release $mod+Shift+y exec --no-startup-id ~/.config/i3/scripts/search.sh chatgpt
+bindsym --release $mod+y exec --no-startup-id ~/.config/i3/scripts/search.sh google
 
 #==============================================================================
 # WINDOW MANAGEMENT
@@ -259,8 +263,10 @@ bar {
 # STARTUP APPLICATIONS
 #==============================================================================
 #
-# Disable disconnected HDMI output (prevents ghost display)
-exec --no-startup-id xrandr --output HDMI-A-0 --off
+# Auto-detect and enable displays on startup + hotplug
+exec --no-startup-id ~/.config/i3/scripts/display-setup.sh
+exec --no-startup-id udevadm monitor --udev --subsystem-match=drm | while read -r line; do ~/.config/i3/scripts/display-setup.sh; done &
+bindsym $mod+d exec --no-startup-id ~/.config/i3/scripts/display-setup.sh
 
 # Set wallpaper (uncomment and set your path)
 exec_always --no-startup-id feh --bg-scale "$HOME/.local/share/wallpapers/the_climber_part_2.png"
@@ -276,3 +282,4 @@ exec --no-startup-id nm-applet
 
 # Start on workspace 1
 exec --no-startup-id i3-msg workspace $ws1
+bindsym $mod+p exec --no-startup-id ~/.local/bin/toggle-peek
