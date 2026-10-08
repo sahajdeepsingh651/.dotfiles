@@ -186,12 +186,72 @@ return {
             },
             html = { filetypes = { "html", "twig", "hbs" } },
             cssls = {},
-            tailwindcss = {},
+            tailwindcss = {
+                filetypes = {
+                    "html",
+                    "css",
+                    "scss",
+                    "javascript",
+                    "javascriptreact",
+                    "typescript",
+                    "typescriptreact",
+                    "vue",
+                    "svelte",
+                },
+                settings = {
+                    tailwindCSS = {
+                        classAttributes = { "class", "className", "classList", "ngClass" },
+                        lint = {
+                            cssConflict = "warning",
+                            invalidApply = "error",
+                            invalidScreen = "error",
+                            invalidVariant = "error",
+                            invalidConfigPath = "error",
+                            invalidTailwindDirective = "error",
+                            recommendedVariantOrder = "warning",
+                        },
+                        experimental = {
+                            classRegex = {
+                                { "cva\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]" },
+                                { "cx\\(([^)]*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)" },
+                                { "cn\\(([^)]*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)" },
+                                { "twMerge\\(([^)]*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)" },
+                                { "clsx\\(([^)]*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)" },
+                            },
+                        },
+                    },
+                },
+            },
+            emmet_language_server = {
+                filetypes = {
+                    "css",
+                    "eruby",
+                    "html",
+                    "javascript",
+                    "javascriptreact",
+                    "less",
+                    "sass",
+                    "scss",
+                    "pug",
+                    "typescriptreact",
+                },
+                init_options = {
+                    showAbbreviationSuggestions = true,
+                    showExpandedAbbreviation = "always",
+                    showSuggestionsAsSnippets = true,
+                },
+            },
+            eslint = {
+                settings = {
+                    workingDirectories = { mode = "auto" },
+                },
+            },
             dockerls = {},
             sqlls = {},
             terraformls = {},
             jsonls = {},
             yamlls = {},
+            marksman = {},
 
             lua_ls = {
                 -- cmd = {...},

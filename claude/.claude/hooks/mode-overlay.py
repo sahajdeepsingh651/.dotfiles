@@ -2,7 +2,7 @@
 """Mode-gated overlay injection (hybrid policy). Handles two hook events:
 
 UserPromptSubmit:
-  card     -- full overlay (lb-shared + mode card). Logged with why=:
+  card     -- full overlay (every file in CARD_FILES[mode]). Logged with why=:
                 switch   mode prefix changed the sticky mode
                 distance transcript grew >= CARD_INTERVAL bytes since last card  <-- the auto refresh
                 compact  first prompt after a compaction (PostCompact reset)
@@ -16,7 +16,13 @@ PostCompact:
   resets the card counter so the next prompt fires a card (why=compact) -- earlier
   injections may have been summarized out of the replay.
 
-Sticky mode: a prefix (L/B/S, optionally LC) sets the mode for the session until changed.
+Sticky mode: a prefix sets the mode for the session until changed. The colon is REQUIRED --
+  a bare "B ..." is prose, not a switch.
+    L:   learning something that isn't code (a text, a paper, a domain)
+    LC:  learning + coding -- the L gate plus the coding cards
+    B:   building        S: ship
+  Cards compose: each mode names a list in CARD_FILES, and both the card text and the tripwire
+  are read from those same files, so the two can never drift apart.
 State per session in ~/.claude/state/mode-overlay/<session_id>.json
 Log every injection in ~/.claude/state/mode-overlay.log:
   grep 'why=distance'  -> just the automatic size-triggered re-injections
@@ -28,34 +34,63 @@ STATE_DIR = os.path.expanduser("~/.claude/state/mode-overlay")
 LOG_FILE = os.path.expanduser("~/.claude/state/mode-overlay.log")
 CARD_INTERVAL = 120_000  # transcript bytes between full cards (~30k tokens)
 
-# Prefix: L/B/S (case-insensitive), optional C (LC -> L), then ':', '-', '.' or whitespace.
-PREFIX_RE = re.compile(r"^\s*([LBSlbs])([Cc])?(?:\s*[:\-–—.]\s*|\s+|\s*$)")
+# Prefix: L/B/S (case-insensitive), optional C (LC -> L), then a REQUIRED ':'.
+# The colon is what makes this unambiguous. Without it, prose starting with the letter was read
+# as a switch -- "B and S cant be true at the same time" silently flipped a live L session to B,
+# and "b-only.md ..." / "l-only.md ..." matched on the hyphen. 2026-08-01.
+PREFIX_RE = re.compile(r"^\s*([LBSlbs])([Cc])?\s*:\s*")
+# Typo guard for the colon rule: a bare "L ..." reads as an attempted prefix. Only checked while
+# no mode is set -- once a mode is sticky he has no reason to re-prefix, so a leading letter
+# mid-session is prose, and nudging on it would reintroduce the ambiguity the colon removed.
+NEAR_PREFIX_RE = re.compile(r"^\s*([LBSlbs])([Cc])?\s+\S")
 
-TRIPWIRES = {
-    "L": "[mode: L] Gate active: no code reveal before Sahaj produces the contract-bearing token "
-         "(compiler-unverifiable contracts). Hypothesis before fixes. Full rules: earlier [L-mode card].",
-    "B": "[mode: B] Large/irreversible -> full methodology; everything else -> decide and tell in one line.",
-    "S": "[mode: S] Execute. Flag only genuine danger, one sentence. No quizzes.",
-}
+# Tripwires live in the card files themselves, one `TRIPWIRE: ...` line per card, collected over
+# the same CARD_FILES list as the card. Single source of truth: a card edit cannot drift from its
+# tripwire. (It could before -- the L tripwire still named only one of the gate's two triggers
+# weeks after the card gained the second. 2026-08-01.)
+TRIPWIRE_RE = re.compile(r"^TRIPWIRE:[ \t]*(.+?)[ \t]*$", re.MULTILINE)
+# L is generalized learning (a text, a domain -- not code). C is the coding layer; it only ever
+# rides on L, so `C:` alone is not a mode -- coding without the learning gate is just B.
 CARD_FILES = {
-    "L": ["lb-shared.md", "l-only.md"],
-    "B": ["lb-shared.md", "b-only.md"],
+    "L": ["l-only.md"],
+    "LC": ["cb-shared.md", "c-mode.md", "l-only.md"],
+    "B": ["cb-shared.md", "b-only.md"],
     "S": ["s-only.md"],
 }
 ASK_MSG = ("[mode-overlay] No mode is set for this session. Before proceeding, ask Sahaj once "
-           "which mode applies (L=learning / B=building / S=ship), per CLAUDE.md.")
+           "which mode applies (L=learning / LC=learning+coding / B=building / S=ship), "
+           "per CLAUDE.md.")
+
+
+def card_text(name):
+    try:
+        with open(os.path.join(MODES_DIR, name)) as f:
+            return f.read()
+    except OSError:
+        return None
 
 
 def read_cards(mode):
     parts = []
     for name in CARD_FILES[mode]:
-        path = os.path.join(MODES_DIR, name)
-        try:
-            with open(path) as f:
-                parts.append(f.read().strip())
-        except OSError:
+        raw = card_text(name)
+        if raw is None:
             parts.append(f"[mode-overlay: missing {name} — tell Sahaj the hook is misconfigured]")
+        else:
+            parts.append(TRIPWIRE_RE.sub("", raw).strip())  # tripwire is the compressed twin
     return "\n\n".join(parts)
+
+
+def read_tripwire(mode):
+    bits = []
+    for name in CARD_FILES[mode]:
+        raw = card_text(name)
+        if raw is not None:
+            bits += [m.group(1) for m in TRIPWIRE_RE.finditer(raw)]
+    if not bits:
+        return (f"[mode: {mode}] No TRIPWIRE: line found in "
+                f"{', '.join(CARD_FILES[mode])} — tell Sahaj the card is missing its tripwire.")
+    return f"[mode: {mode}] " + " ".join(bits)
 
 
 def log(session_id, mode, tier, size, why=None):
@@ -102,14 +137,23 @@ def main():
     switched = False
     if m:
         new_mode = m.group(1).upper()
-        if m.group(2):  # LC and variants fold into L
-            new_mode = "L"
+        if m.group(2) and new_mode == "L":  # LC: -> learning + coding; C only modifies L
+            new_mode = "LC"
         if new_mode != state["mode"]:
             switched = True
         state["mode"] = new_mode
 
     mode = state["mode"]
     if not mode:
+        near = NEAR_PREFIX_RE.match(prompt)
+        if near and not state.get("nudged"):
+            state["nudged"] = True
+            save()
+            want = near.group(1).upper() + ("C" if near.group(2) else "")
+            print(f"[mode-overlay] That looks like a mode prefix without its colon. Ask Sahaj "
+                  f'whether he meant "{want}:" — the colon is required, so no mode was set.')
+            log(session_id, "-", "nudge", size)
+            return
         if not state.get("asked"):
             state["asked"] = True
             save()
@@ -139,7 +183,7 @@ def main():
         log(session_id, mode, "card", size, why)
     else:
         save()
-        print(TRIPWIRES[mode])
+        print(read_tripwire(mode))
         log(session_id, mode, "tripwire", size)
 
 

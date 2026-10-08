@@ -4,10 +4,7 @@ vim.g.maplocalleader = " "
 
 -- Disable the spacebar key's default behavior in Normal and Visual modes
 vim.keymap.set({ "n", "v" }, "<Space>", "<Nop>", { silent = true })
-vim.keymap.set("n", "s", "<Nop>", { noremap = true, silent = true })
--- i removerd s for the easy use of telesecope keys but is important in writing mode
--- so i will try to use it again
---
+
 -- For conciseness
 local opts = { noremap = true, silent = true }
 -- save file

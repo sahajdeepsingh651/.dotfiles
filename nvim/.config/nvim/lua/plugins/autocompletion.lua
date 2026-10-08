@@ -39,6 +39,8 @@ return { -- Autocompletion
     local cmp = require 'cmp'
     local luasnip = require 'luasnip'
     luasnip.config.setup {}
+    luasnip.filetype_extend('javascriptreact', { 'html', 'javascript' })
+    luasnip.filetype_extend('typescriptreact', { 'html', 'typescript', 'javascript' })
 
     local kind_icons = {
       Text = '󰉿',
@@ -96,7 +98,7 @@ return { -- Autocompletion
 
         -- If you prefer more traditional completion keymaps,
         -- you can uncomment the following lines
-        --['<CR>'] = cmp.mapping.confirm { select = true },
+        ['<CR>'] = cmp.mapping.confirm { select = true },
         --['<Tab>'] = cmp.mapping.select_next_item(),
         --['<S-Tab>'] = cmp.mapping.select_prev_item(),
 
@@ -160,13 +162,20 @@ return { -- Autocompletion
       formatting = {
         fields = { 'kind', 'abbr', 'menu' },
         format = function(entry, vim_item)
-          vim_item.kind = string.format('%s', kind_icons[vim_item.kind])
+          vim_item.kind = string.format('%s', kind_icons[vim_item.kind] or '')
           vim_item.menu = ({
             nvim_lsp = '[LSP]',
             luasnip = '[Snippet]',
             buffer = '[Buffer]',
             path = '[Path]',
           })[entry.source.name]
+
+          -- Tailwind CSS color previews in completion menu
+          local ok, tailwind_cmp = pcall(require, 'tailwindcss-colorizer-cmp')
+          if ok then
+            return tailwind_cmp.formatter(entry, vim_item)
+          end
+
           return vim_item
         end,
       },

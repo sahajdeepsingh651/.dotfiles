@@ -2,7 +2,7 @@
   "env": {
     "CLAUDE_CODE_SCROLL_SPEED": "3"
   },
-  "model": "sonnet",
+  "model": "opus[1m]",
   "hooks": {
     "UserPromptSubmit": [
       {
@@ -34,8 +34,9 @@
     "command": "bash /home/sahaj/.claude/statusline-command.sh"
   },
   "enabledPlugins": {
-    "learning-opportunities@learning-opportunities": true,
-    "orient@learning-opportunities": false
+    "learning-opportunities@learning-opportunities": false,
+    "orient@learning-opportunities": false,
+    "frontend-design@claude-plugins-official": false
   },
   "extraKnownMarketplaces": {
     "learning-opportunities": {
@@ -51,5 +52,33 @@
   "skipDangerousModePermissionPrompt": true,
   "skipWorkflowUsageWarning": true,
   "theme": "dark-ansi",
-  "editorMode": "vim"
+  "editorMode": "vim",
+  "autoMode": {
+    "environment": [
+      "### Org-wide",
+      "**Organization**: None configured",
+      "**Cloud provider(s)**: None configured",
+      "**Repository visibility**: not queryable here — assume private (default heuristic; the GitHub repo name Knowledge_graph is not itself indicative of public status)",
+      "**Internal sharing / snippet hosting**: None configured — treat public paste/gist services as outside the trust boundary",
+      "**Secrets management**: None configured",
+      "**Default / protected branches**: default branch is master; protected-branch status not queryable here (gh API unreachable) — do not assume unprotected",
+      "**CI/CD deploy targets**: None configured",
+      "**Network posture**: None configured",
+      "**Source control**: The trusted repo (github.com/sahajdeepsingh651/Knowledge_graph) and its remote only — no additional orgs configured",
+      "**Trusted internal domains**: None configured",
+      "**Trusted cloud buckets**: None configured",
+      "**Key internal services**: None configured",
+      "**Internal package registry**: None configured",
+      "**Sensitive data locations & audiences**: any file or store holding personal data, confidential business data, credentials, regulated data, or similarly sensitive material; preserve exact handles when known and share only with audiences cleared at the [named+specifics] bar",
+      "**Data retention / declassification**: None configured",
+      "**Sensitive remote targets**: any namespace, host, or container whose name carries `prod` or `production` as a whole word or name segment",
+      "**Protected deployment namespaces / environments**: None configured — fall back to the Sensitive remote targets heuristic",
+      "**Protected IaC scopes**: IAM, RBAC, networking, quota, and node-pool resources; anything whose name or tag carries `prod` or `production` as a whole word or name segment",
+      "### User-specific",
+      "**Primary use of Claude Code**: software development (personal knowledge-graph / notes repo — obsidian_vault)",
+      "**Trusted repo**: /home/sahaj/obsidian_vault and its remote origin (https://github.com/sahajdeepsingh651/Knowledge_graph.git); visibility unverified so treat as private by default — confidential material OK there, but secrets and sensitive personal/entrusted data are never cleared into it regardless of visibility",
+      "**Org-specific CLIs**: None configured — user runs some personal/non-standard CLIs (agy, ml, devchron, vector-lab-connect) seen in shell history but these are outside this repo's transcript evidence and not corroborated as org tooling",
+      "routine under /home/sahaj/obsidian_vault/ prefix: normal note/graph edits, git commits and pushes to origin"
+    ]
+  }
 }

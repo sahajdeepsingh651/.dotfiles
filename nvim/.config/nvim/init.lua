@@ -45,4 +45,7 @@ require("plugins.trouble"),
 	require("plugins.flash"),
 	require("plugins.mermaid"),
 	require("plugins.live-preview"),
+	require("plugins.autotag"),
+	require("plugins.tailwind"),
+	require("plugins.eca"),
 })
