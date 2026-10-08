@@ -94,7 +94,7 @@ fi
 alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
-
+alias claude_code='ANTHROPIC_BASE_URL=http://localhost:8080 claude'
 # Add an "alert" alias for long running commands.  Use like so:
 # Alias definitions.
 # You may want to put all your additions into a separate file like
@@ -237,11 +237,65 @@ sessionstart() {
     disown
     echo "session → $(cat "$HOME/.devtime_current")  [chunk=${chunk}m recovery=${rec}m, auto-cycling]"
 }
-brk()        { ~/.local/bin/devtime-brk; }           # drift mark — bound to tmux prefix+u
-brkstart()   { _dtlog "- $(date +%H:%M)  ⏸ forced out"; }  # external interruption only
-brkend()     { _dtlog "- $(date +%H:%M)  ⏸ forced in"; }
+brk() { ~/.local/bin/devtime-brk; }                     # drift mark — bound to tmux prefix+u
+brkstart() { _dtlog "- $(date +%H:%M)  ⏸ forced out"; } # external interruption only
+brkend() { _dtlog "- $(date +%H:%M)  ⏸ forced in"; }
 sessionend() {
     [ -f "$HOME/.devtime_pid" ] && kill "$(cat "$HOME/.devtime_pid")" 2>/dev/null && rm -f "$HOME/.devtime_pid"
     _dtlog "- $(date +%H:%M)  ■ STOPPED"
 }
 # --- end devtime break logger ---
+
+# --- hydration logger (experiments/hydration) ---
+HYDRO_RAW="$HOME/obsidian_vault/experiments/hydration/raw"
+_hydrofile() { echo "${HYDRO_RAW:?hydration: HYDRO_RAW unset}/$(date +%F)-water.md"; }
+
+waterstart() { # anchor the 8-hour window (mirrors sessionstart)
+    mkdir -p "$HYDRO_RAW"
+    echo "- $(date +%H:%M)  ▶ START  target 3.0L/8h" >>"$(_hydrofile)"
+    echo "hydration → $(_hydrofile)  [3.0 L in 8 h — prefix + y per litre]"
+}
+water() { ~/.local/bin/water-log "${1:-1}"; }  # 1 L default; `water 0.5` for a half — tmux prefix + y
+waterday() { ~/.local/bin/water-day "$@"; }    # today's readout, or waterday YYYY-MM-DD
+waterundo() { local f; f=$(_hydrofile) || return 1; sed -i '${/💧/d}' "$f"; }  # drop a mis-press (last mark only)
+# --- end hydration logger ---
+
+# NVM Lazy Loading
+export NVM_DIR="$HOME/.config/nvm"
+
+# Add current nvm node bin to PATH directly so installed binaries (like gemini) work instantly
+if [ -d "$NVM_DIR/versions/node" ]; then
+    NODE_DEFAULT_VER=$(ls "$NVM_DIR/versions/node" 2>/dev/null | tail -n 1)
+    [ -n "$NODE_DEFAULT_VER" ] && export PATH="$NVM_DIR/versions/node/$NODE_DEFAULT_VER/bin:$PATH"
+fi
+
+# Function to load NVM on-demand when calling node/npm/nvm
+load_nvm() {
+    unset -f nvm node npm
+    [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+    [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+}
+
+nvm() {
+    load_nvm
+    nvm "$@"
+}
+node() {
+    load_nvm
+    node "$@"
+}
+npm() {
+    load_nvm
+    npm "$@"
+}
+
+# Added by Antigravity CLI installer
+export PATH="/home/sahaj/.local/bin:$PATH"
+
+alias vector-vm='ssh vector-vm'
+
+alias rnd-vpn-connect='xdg-open "https://rndvpn.enlight.dev:8443/remote/saml/start?redirect=1" >/dev/null 2>&1 & sudo openfortivpn rndvpn.enlight.dev:8443 --username=research --trusted-cert 942cdb56a162ca3b8f031bd9d7f99698bad93dc679fb055e03d2c9e7c1ac88ed --saml-login'
+
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="$HOME/.sdkman"
+[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"

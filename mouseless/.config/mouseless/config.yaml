@@ -5,8 +5,8 @@ baseScrollSpeed: 20.0
 layers:
   - name: initial
     bindings:
-      g: tap-hold g ; toggle-layer mouse ; 300
-      space: tap-hold space ; toggle-layer arrows ; 200
+      g: tap-hold-next-release g ; toggle-layer mouse ; 300
+      space: tap-hold-next-release space ; toggle-layer arrows ; 200
 
   - name: mouse
     passThrough: true
